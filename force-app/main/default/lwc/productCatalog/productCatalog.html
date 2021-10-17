@@ -1,0 +1,22 @@
+<template>
+    <lightning-layout multiple-rows="true">
+        <lightning-layout-item size="12" padding="around-small">
+            <c-product-filter onsearch={handleSearch}></c-product-filter>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="5" padding="horizontal-small">
+            <c-product-list onproductselect={handleProductSelect}></c-product-list>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="7">
+            <lightning-tabset variant="scoped">
+                <lightning-tab label="Configurations" value="configuration" onactive={handleActiveTab}>
+                    <c-product-configurations product-id={selectedId}></c-product-configurations>
+                </lightning-tab>
+                <lightning-tab label="Full Specs" value="fullspec" onactive={handleActiveTab}>
+                    <c-product-full-spec product-id={selectedId}></c-product-full-spec>
+                </lightning-tab>
+            </lightning-tabset>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

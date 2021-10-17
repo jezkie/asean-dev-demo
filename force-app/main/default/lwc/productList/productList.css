@@ -1,0 +1,16 @@
+.slds-box {
+    padding: 0 !important;
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 6px solid !important;
+    border-radius: 0 !important;
+}
+
+.slds-box:nth-child(even) {
+    border-color: rgb(0, 183, 255) !important;
+}
+
+.slds-box:nth-child(odd) {
+    border-color: rgb(255, 0, 234) !important;
+}

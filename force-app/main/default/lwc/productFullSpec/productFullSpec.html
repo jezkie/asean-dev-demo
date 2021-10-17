@@ -1,0 +1,101 @@
+<template>
+    <lightning-card>
+        <template if:true={productSpec} >
+            <lightning-layout multiple-rows="true" horizontal-align="center">
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Processor
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.processor}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Operating System
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.operatingSystem}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Display
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8" >
+                    <lightning-formatted-rich-text value={productSpec.display} style="display: inline;"></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Memory
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.memory}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Battery
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.battery}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Storage
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.storage}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Graphics
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.graphics}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Audio
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.audio}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Dimension
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.dimension}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Weight
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.weight}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Connectivity
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.connectivity}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Ports
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.ports}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-medium" size="4" class="label">
+                    Others
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-medium" size="8">
+                    <lightning-formatted-rich-text value={productSpec.others}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={productSpec}>
+            <p class="slds-align_absolute-center">Select a product to view specifications.</p>
+        </template>
+    </lightning-card>
+</template>

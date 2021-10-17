@@ -1,0 +1,18 @@
+.label {
+    text-align: right;
+    
+}
+
+lightning-layout lightning-layout-item {
+    /* border-bottom: black solid 1px; */
+}
+
+lightning-layout lightning-layout-item:last-child, 
+lightning-layout lightning-layout-item:nth-last-child(2){
+    border-bottom: 0;
+}
+
+lightning-layout lightning-layout-item:nth-child(odd){
+    /* border-right: black solid 1px; */
+    font-weight: bold;
+}

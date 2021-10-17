@@ -1,0 +1,12 @@
+.content {
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr 1fr 1fr min-content; */
+    align-items: flex-end;
+    /* justify-items: center; */
+    column-gap: 1em;
+    /* max-width:  80vw; */
+}
+
+.slds-card {
+    padding-bottom: 1em !important;
+}

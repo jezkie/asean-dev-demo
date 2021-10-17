@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Results">
+        <template if:false={showList}>
+            <div class="slds-align_absolute-center">No products available.</div>
+        </template>
+        <template if:true={showList}>
+            <lightning-layout multiple-rows="true">
+                <template for:each={products} for:item="product">
+                    <lightning-layout-item size="12" key={product.id} class="slds-m-bottom_xx-small slds-box">
+                        <c-product-tile 
+                            product={product} 
+                            selected-product={selectedProduct} 
+                            onproductselect={handleProductSelect}></c-product-tile>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+    </lightning-card>
+</template>

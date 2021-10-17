@@ -1,0 +1,22 @@
+<template>
+    <lightning-card>
+        <p slot="title">
+            {name}
+        </p>
+
+        <lightning-layout class={tileClass} multiple-rows="true" >
+            <lightning-layout-item size="4" class="slds-m-left_small slds-m-right_large slds-p-around_xxx-small">
+                <div style={backgroundStyle} class="tile"></div>
+            </lightning-layout-item>
+            <lightning-layout-item size="6">
+                <p>From <span class="label">
+                    <lightning-formatted-number format-style="currency" currency-code="USD" value={minPrice}></lightning-formatted-number></span> to <span class="label">
+                    <lightning-formatted-number format-style="currency" currency-code="USD" value={maxPrice}></lightning-formatted-number></span></p>
+                <p><span class="label">{available}</span> in stock</p>
+                <p><span class="label">{availableConfig}</span> configuration available.</p>
+            </lightning-layout-item>
+            <lightning-button style="right: 1rem; bottom: 0.75rem; z-index: 9;position:absolute;" onclick={handleProductClick} label="Full Specs"></lightning-button>
+        </lightning-layout>
+        
+    </lightning-card>
+</template>
