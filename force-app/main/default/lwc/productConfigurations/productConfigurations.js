@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 import getConfigurations from '@salesforce/apex/ProductDataService.getConfigurations';
 
@@ -6,7 +6,7 @@ export default class ProductConfigurations extends LightningElement {
 
     @api productId = '';
     configs;
-    wiredConfs;
+    @track wiredConfs;
 
     @wire(getConfigurations, {productId: '$productId'})
     wiredConfigurations(result) {
@@ -23,6 +23,7 @@ export default class ProductConfigurations extends LightningElement {
     }
 
     handleConfUpdate(event) {
+        console.log('Refreshing confs...');
         return refreshApex(this.wiredConfs);
     }
 

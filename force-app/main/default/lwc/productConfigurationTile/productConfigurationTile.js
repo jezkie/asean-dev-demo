@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api,track } from 'lwc';
 import getAllocations from '@salesforce/apex/ProductDataService.getAllocations';
 import updateLocations from '@salesforce/apex/ProductDataService.updateLocations';
 
@@ -9,7 +9,7 @@ export default class ProductConfigurationTile extends LightningElement {
 
     showEditAllocModal = false;
 
-    locationCounts = [];
+    @track locationCounts = [];
 
     storesToUpdate = [];
 
@@ -80,7 +80,9 @@ export default class ProductConfigurationTile extends LightningElement {
         });
 
         Promise.all(promises)
-            .then(res => console.log('Update location results', res));
+            .then(res => {
+                console.log('Update location results', res);
+            });
         
         this.showEditAllocModal = false;
 
