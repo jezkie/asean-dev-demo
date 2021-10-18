@@ -1,5 +1,5 @@
 <template>
-    <template if:true={configs}>
+    <template if:true={showConfigs}>
         <lightning-layout multiple-rows="true">
             <template for:each={configs} for:item="conf">
                 <lightning-layout-item key={conf.Id} size="6" class="slds-p-top_none slds-p-bottom_small slds-p-right_small slds-p-left_small">
@@ -9,7 +9,7 @@
         </lightning-layout>
     </template>
 
-    <template if:false={configs}>
+    <template if:false={showConfigs}>
         <p class="slds-align_absolute-center">Select a product to view configurations.</p>
     </template>
 </template>

@@ -5,7 +5,7 @@
         <p><span style="font-weight: bold;">RAM: </span> {conf.Memory__c}</p>
         <p><span style="font-weight: bold;">Storage: </span> {conf.StorageType__c}</p>
         <p><span style="font-weight: bold;">Price: </span><lightning-formatted-number format-style="currency" currency-code="USD" value={conf.Price__c}></lightning-formatted-number></p>
-        <p><span style="font-weight: bold;">{conf.StockCount__c}</span> is available.
+        <p><span style="font-weight: bold;">{stockCount}</span> is available.
             <template if:true={showEdit}>
                 <lightning-button variant="base" label="Edit allocation" onclick={handleEditAlloc}></lightning-button>
             </template>

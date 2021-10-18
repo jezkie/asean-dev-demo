@@ -5,7 +5,7 @@ import getConfigurations from '@salesforce/apex/ProductDataService.getConfigurat
 export default class ProductConfigurations extends LightningElement {
 
     @api productId = '';
-    configs = [];
+    configs;
     wiredConfs;
 
     @wire(getConfigurations, {productId: '$productId'})
@@ -24,5 +24,9 @@ export default class ProductConfigurations extends LightningElement {
 
     handleConfUpdate(event) {
         return refreshApex(this.wiredConfs);
+    }
+
+    get showConfigs() {
+        return this.configs && this.configs !== undefined && this.configs.length > 0 ? true : false;
     }
 }

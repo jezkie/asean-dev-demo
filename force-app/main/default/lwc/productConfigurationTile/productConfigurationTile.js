@@ -91,7 +91,21 @@ export default class ProductConfigurationTile extends LightningElement {
     }
 
     get showEdit() {
-        return this.conf.ProductItems__r && this.conf.ProductItems__r.length > 0;
+        if (this.conf.ProductItems__r && this.conf.ProductItems__r.length > 0) {
+            const arr = this.conf.ProductItems__r.filter(item => {
+                return item.Location__c !== 'Warehouse'
+            });
+
+            if (arr.length > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    get stockCount() {
+        return this.conf.ProductItems__r ? this.conf.ProductItems__r.length : 0;
     }
 
 }
