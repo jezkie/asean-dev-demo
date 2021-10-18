@@ -12,7 +12,6 @@ export default class ProductConfigurations extends LightningElement {
     wiredConfigurations(result) {
         this.wiredConfs = result;
         if (result.data) {
-            console.log(result.data);
             this.configs = result.data;
         }
     }
@@ -22,8 +21,8 @@ export default class ProductConfigurations extends LightningElement {
         this.configs = null;
     }
 
+    // eslint-disable-next-line no-unused-vars
     handleConfUpdate(event) {
-        console.log('Refreshing confs...');
         return refreshApex(this.wiredConfs);
     }
 

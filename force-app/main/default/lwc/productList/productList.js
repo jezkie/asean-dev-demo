@@ -13,7 +13,7 @@ export default class ProductList extends LightningElement {
     @wire(getProducts, { brand: '$brand', processor: '$cpu', memory: '$ram', storageType: '$storage' })
     wiredProducts({data, error}) {
         if (error) {
-            console.log(error)
+            console.log(error);
         } else if (data) {
             console.table(data);
             this.selectedProduct = '';

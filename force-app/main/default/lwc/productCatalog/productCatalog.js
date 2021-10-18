@@ -10,7 +10,6 @@ export default class ProductCatalog extends LightningElement {
 
     handleProductSelect(event) {
         this.selectedId = event.detail;
-        console.log('Selected product', this.selectedId);
     }
 
     handleSearch(event) {

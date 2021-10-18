@@ -8,6 +8,7 @@ export default class ProductTile extends LightningElement {
 
     @api selectedProduct;
 
+    // eslint-disable-next-line no-unused-vars
     handleProductClick(event) {
         this.dispatchEvent(new CustomEvent('productselect', {
             detail: this.product.id

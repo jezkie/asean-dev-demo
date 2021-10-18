@@ -38,11 +38,11 @@ export default class ProductConfigurationTile extends LightningElement {
 
     requiredUnits;
 
+    // eslint-disable-next-line no-unused-vars
     handleEditAlloc(event) {
         this.showEditAllocModal = true;
         getAllocations({confId: this.conf.Id})
             .then(result => {
-                console.log(result);
                 let arr = Object.entries(result).map((item, idx) => {
                     const [location, count] = item;
                     return {
@@ -61,11 +61,11 @@ export default class ProductConfigurationTile extends LightningElement {
                         total: item.count + this.warehouseCount
                     }
                 });
-                console.log('this.locationCounts', this.locationCounts);
             })
             .catch(err => console.log(err)); 
     }
 
+    // eslint-disable-next-line no-unused-vars
     handleCancelClick(event) {
         this.showEditAllocModal = false;
     }
@@ -89,6 +89,7 @@ export default class ProductConfigurationTile extends LightningElement {
         this.isSatisfied = checkUnitsRequiredSatisfied(this.requiredUnits, totalStoreCount(this));
     }
 
+    // eslint-disable-next-line no-unused-vars
     handleSave(event) {
         let promises = this.storesToUpdate.map(eachLoc => {
             return updateLocations(
