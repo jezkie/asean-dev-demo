@@ -1,0 +1,128 @@
+[
+    {
+        "Id": "01t5g000003mBepAAE",
+        "Name": "HP Envy 13",
+        "MaxUnitPrice__c": 949.99,
+        "MinUnitPrice__c": 659.99,
+        "DisplayUrl": "https://5.imimg.com/data5/UN/YJ/GF/SELLER-32799687/hp-envy-x360-laptop-500x500.png",
+        "ProductItems__r": [
+            {
+                "Product__c": "01t5g000003mBepAAE",
+                "Id": "a005g000031UTauAAG",
+                "SerialNo__c": "HPE007"
+            },
+            {
+                "Product__c": "01t5g000003mBepAAE",
+                "Id": "a005g000031UTavAAG",
+                "SerialNo__c": "HPE008"
+            },
+            {
+                "Product__c": "01t5g000003mBepAAE",
+                "Id": "a005g000031UTasAAG",
+                "SerialNo__c": "HPE005"
+            },
+            {
+                "Product__c": "01t5g000003mBepAAE",
+                "Id": "a005g000031UTatAAG",
+                "SerialNo__c": "HPE006"
+            }
+        ],
+        "LaptopConfigurations__r": [
+            {
+                "ConfigurableProduct__c": "01t5g000003mBepAAE",
+                "Id": "a025g0000070Xg2AAE"
+            },
+            {
+                "ConfigurableProduct__c": "01t5g000003mBepAAE",
+                "Id": "a025g0000070Xg3AAE"
+            }
+        ]
+    },
+    {
+        "Id": "01t5g000003m3r5AAA",
+        "Name": "Lenovo Legion 5",
+        "Description": "Lenovo Legion Gaming 3, Intel Core i5-11300H, 8 GB, DDR4, 3200 MHz, SSD 512 GB, NVIDIA GeForce RTX 3050 4GB",
+        "MaxUnitPrice__c": 2000,
+        "MinUnitPrice__c": 1200,
+        "DisplayUrl": "https://www.lenovo.com/medias/Legion-5Pro-16-AMD-88GMY501578-725x515.png?context=bWFzdGVyfHJvb3R8NjM3ODR8aW1hZ2UvcG5nfGg0Ny9oMWEvMTE3ODg3NTg3MTIzNTAucG5nfDI5NTYwMTZmNDFlZjEyYmY2YmJlYzJmODZhMTFkN2ZmOGI5NGYzOGI1ODRkYmMzZjg5NjM1YzM2MzllYzhkZWI",
+        "ProductItems__r": [
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTb1AAG",
+                "SerialNo__c": "000008"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTb0AAG",
+                "SerialNo__c": "000007"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTazAAG",
+                "SerialNo__c": "000006"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTayAAG",
+                "SerialNo__c": "000005"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTaxAAG",
+                "SerialNo__c": "000003"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTawAAG",
+                "SerialNo__c": "000002"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTarAAG",
+                "SerialNo__c": "000001"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTb3AAG",
+                "SerialNo__c": "000010"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTb4AAG",
+                "SerialNo__c": "000011"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTb5AAG",
+                "SerialNo__c": "000012"
+            },
+            {
+                "Product__c": "01t5g000003m3r5AAA",
+                "Id": "a005g000031UTb2AAG",
+                "SerialNo__c": "000009"
+            }
+        ],
+        "LaptopConfigurations__r": [
+            {
+                "ConfigurableProduct__c": "01t5g000003m3r5AAA",
+                "Id": "a025g0000070W1EAAU"
+            },
+            {
+                "ConfigurableProduct__c": "01t5g000003m3r5AAA",
+                "Id": "a025g0000070W1DAAU"
+            },
+            {
+                "ConfigurableProduct__c": "01t5g000003m3r5AAA",
+                "Id": "a025g0000070W1CAAU"
+            },
+            {
+                "ConfigurableProduct__c": "01t5g000003m3r5AAA",
+                "Id": "a025g0000070W1MAAU"
+            },
+            {
+                "ConfigurableProduct__c": "01t5g000003m3r5AAA",
+                "Id": "a025g0000070W38AAE"
+            }
+        ]
+    }
+]
