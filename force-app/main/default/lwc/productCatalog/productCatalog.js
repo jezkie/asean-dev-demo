@@ -16,7 +16,7 @@ export default class ProductCatalog extends LightningElement {
     handleSearch(event) {
         this.selectedId = null;
         this.template.querySelector('c-product-list').loadProducts(event.detail);
-        var activeTab = this.template.querySelector('lightning-tabset').activeTabValue;
+        let activeTab = this.template.querySelector('lightning-tabset').activeTabValue;
         this.template.querySelector(getActiveTabCompReset(activeTab)).reset();
     }
 

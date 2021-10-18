@@ -5,7 +5,7 @@
         <p><span style="font-weight: bold;">RAM: </span> {conf.Memory__c}</p>
         <p><span style="font-weight: bold;">Storage: </span> {conf.StorageType__c}</p>
         <p><span style="font-weight: bold;">Price: </span><lightning-formatted-number format-style="currency" currency-code="USD" value={conf.Price__c}></lightning-formatted-number></p>
-        <p><span style="font-weight: bold;">{stockCount}</span> is available.
+        <p><span style="font-weight: bold;">{stockCount}</span> is available. &nbsp;
             <template if:true={showEdit}>
                 <lightning-button variant="base" label="Edit allocation" onclick={handleEditAlloc}></lightning-button>
             </template>
@@ -20,7 +20,10 @@
                 </header>
                 <div class="slds-modal__content slds-p-around_medium">
                     <span style="font-weight: bolder;">IMPORTANT:</span> This will update the status of item to <span style="font-weight: bolder;">Reserved</span> in the ff. retail stores.<br/>
-                    <template for:each={locationCounts} for:item="store">
+                    <lightning-input label="How many units do you need?" type="number" value={requiredUnits} onchange={handleRequiredUnitsChange}></lightning-input>
+                    <template if:true={isSatisfied}><span style="font-weight:bolder;color: green;">Satisfied</span></template>
+                    <template if:false={isSatisfied}><span style="font-weight:bolder;color: red;">Not Satisfied</span></template>
+                    <template for:each={locationCounts} for:item="store" >
                         <c-store-unit-slider 
                             store={store.location} 
                             min={warehouseCount} 

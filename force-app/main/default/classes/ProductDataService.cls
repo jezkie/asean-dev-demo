@@ -39,7 +39,7 @@ public class ProductDataService {
     @AuraEnabled(cacheable=true)
     public static List<LaptopConfiguration__c> getConfigurations(String productId) {
         return [SELECT Id, Name, Processor__c, Memory__c, StorageType__c, Price__c, StockCount__c,
-                    (SELECT Id, Location__c FROM ProductItems__r WHERE Status__c = 'Available')  
+                    (SELECT Id, Location__c, Status__c FROM ProductItems__r WHERE Status__c = 'Available' OR Status__c = 'Reserved')  
                 FROM LaptopConfiguration__c 
                 WHERE ConfigurableProduct__c = :productId];
     }

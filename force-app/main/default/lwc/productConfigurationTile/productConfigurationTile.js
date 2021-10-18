@@ -2,6 +2,27 @@ import { LightningElement, api,track } from 'lwc';
 import getAllocations from '@salesforce/apex/ProductDataService.getAllocations';
 import updateLocations from '@salesforce/apex/ProductDataService.updateLocations';
 
+function totalStoreCount(__self) {
+    let sum = __self.warehouseCount;
+    if (__self.storesToUpdate && __self.storesToUpdate.length > 0) {
+
+        let storeCount = __self.storesToUpdate.reduce((total, obj) => {
+            return total + obj.numToUpdate;
+        }, 0);
+
+        sum = sum + storeCount;
+    }
+
+    return sum;
+}
+
+function checkUnitsRequiredSatisfied(unitsRequired, total) {
+    if (total < unitsRequired) {
+        return false;
+    } 
+    return true;
+}
+
 export default class ProductConfigurationTile extends LightningElement {
     @api conf;
 
@@ -13,16 +34,17 @@ export default class ProductConfigurationTile extends LightningElement {
 
     storesToUpdate = [];
 
+    isSatisfied = true;
+
+    requiredUnits;
+
     handleEditAlloc(event) {
         this.showEditAllocModal = true;
         getAllocations({confId: this.conf.Id})
             .then(result => {
                 console.log(result);
-                var arr = Object.entries(result).map((item, idx) => {
+                let arr = Object.entries(result).map((item, idx) => {
                     const [location, count] = item;
-                    if (location === 'Warehouse') {
-                        this.warehouseCount = count;
-                    }
                     return {
                         idx: idx,
                         location: location,
@@ -49,26 +71,25 @@ export default class ProductConfigurationTile extends LightningElement {
     }
 
     handleSlide(event) {
-        console.log(event.detail);
         const storeToUpdate = {
             confId: this.conf.Id,
             location: event.detail.store,
             numToUpdate: event.detail.numToChange
         }
 
-        var idx;
+        let idx;
         idx = this.storesToUpdate.findIndex(s => s.location === storeToUpdate.location);
         if (idx !== -1) {
-            var element = this.storesToUpdate.find(s => s.location === storeToUpdate.location);
+            let element = this.storesToUpdate.find(s => s.location === storeToUpdate.location);
             element.numToUpdate = storeToUpdate.numToUpdate;
         } else {
             this.storesToUpdate.push(storeToUpdate);
         }
+
+        this.isSatisfied = checkUnitsRequiredSatisfied(this.requiredUnits, totalStoreCount(this));
     }
 
     handleSave(event) {
-        console.log('this.storesToUpdate', this.storesToUpdate);
-
         let promises = this.storesToUpdate.map(eachLoc => {
             return updateLocations(
                 {
@@ -92,12 +113,21 @@ export default class ProductConfigurationTile extends LightningElement {
 
     }
 
+    handleRequiredUnitsChange(event) {
+        this.requiredUnits = event.target.value;
+        this.isSatisfied = checkUnitsRequiredSatisfied(this.requiredUnits, totalStoreCount(this));
+    }
+
     get showEdit() {
         if (this.conf.ProductItems__r && this.conf.ProductItems__r.length > 0) {
             const arr = this.conf.ProductItems__r.filter(item => {
                 return item.Location__c !== 'Warehouse'
             });
 
+            const warehouseOrReserve = this.conf.ProductItems__r.filter(item => {
+                return item.Location__c === 'Warehouse' || (item.Location__c !== 'Warehouse' && item.Status__c === 'Reserved')
+            });
+            this.warehouseCount = warehouseOrReserve.length;
             if (arr.length > 0) {
                 return true;
             }
