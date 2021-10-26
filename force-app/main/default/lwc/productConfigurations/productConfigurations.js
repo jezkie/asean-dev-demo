@@ -5,14 +5,16 @@ import getConfigurations from '@salesforce/apex/ProductDataService.getConfigurat
 export default class ProductConfigurations extends LightningElement {
 
     @api productId = '';
+    @api opptyId;
     configs;
     @track wiredConfs;
 
-    @wire(getConfigurations, {productId: '$productId'})
+    @wire(getConfigurations, { productId: '$productId' })
     wiredConfigurations(result) {
         this.wiredConfs = result;
         if (result.data) {
             this.configs = result.data;
+            console.table(this.configs);
         }
     }
 
@@ -27,6 +29,6 @@ export default class ProductConfigurations extends LightningElement {
     }
 
     get showConfigs() {
-        return this.configs && this.configs !== undefined && this.configs.length > 0 ? true : false;
+        return this.configs && this.configs !== undefined && this.configs.length > 0;
     }
 }

@@ -1,4 +1,4 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 function getActiveTabCompReset(activeTab) {
     return activeTab === 'configuration' ? 'c-product-configurations' : 'c-product-full-spec';
@@ -6,6 +6,7 @@ function getActiveTabCompReset(activeTab) {
 
 export default class ProductCatalog extends LightningElement {
 
+    @api opptyId;
     selectedId = '';
 
     handleProductSelect(event) {

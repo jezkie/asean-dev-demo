@@ -5,9 +5,12 @@
         <p><span style="font-weight: bold;">RAM: </span> {conf.Memory__c}</p>
         <p><span style="font-weight: bold;">Storage: </span> {conf.StorageType__c}</p>
         <p><span style="font-weight: bold;">Price: </span><lightning-formatted-number format-style="currency" currency-code="USD" value={conf.Price__c}></lightning-formatted-number></p>
-        <p><span style="font-weight: bold;">{stockCount}</span> is available. &nbsp;
+        <p><span style="font-weight: bold;">Available: </span> {stockCount}</p>
+
+        <p><span style="font-weight: bold;">{allocatedCount}</span> are reserved for this opportunity. &nbsp;
+        
             <template if:true={showEdit}>
-                <lightning-button variant="base" label="Edit allocation" onclick={handleEditAlloc}></lightning-button>
+                <lightning-button variant="base" label="Click to reserve" onclick={handleEditAlloc}></lightning-button>
             </template>
         </p>
     </div>
@@ -26,7 +29,7 @@
                     <template for:each={locationCounts} for:item="store" >
                         <c-store-unit-slider 
                             store={store.location} 
-                            min={warehouseCount} 
+                            min={allocatedCount} 
                             max={store.total}
                             count={store.count}
                             key={store.idx}

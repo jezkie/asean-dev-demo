@@ -11,7 +11,7 @@
         <lightning-layout-item size="7">
             <lightning-tabset variant="scoped">
                 <lightning-tab label="Configurations" value="configuration" onactive={handleActiveTab}>
-                    <c-product-configurations product-id={selectedId}></c-product-configurations>
+                    <c-product-configurations oppty-id={opptyId} product-id={selectedId}></c-product-configurations>
                 </lightning-tab>
                 <lightning-tab label="Full Specs" value="fullspec" onactive={handleActiveTab}>
                     <c-product-full-spec product-id={selectedId}></c-product-full-spec>

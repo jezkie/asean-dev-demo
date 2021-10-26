@@ -3,7 +3,7 @@ import getAllocations from '@salesforce/apex/ProductDataService.getAllocations';
 import updateLocations from '@salesforce/apex/ProductDataService.updateLocations';
 
 function totalStoreCount(__self) {
-    let sum = __self.warehouseCount;
+    let sum = __self.allocatedCount;
     if (__self.storesToUpdate && __self.storesToUpdate.length > 0) {
 
         let storeCount = __self.storesToUpdate.reduce((total, obj) => {
@@ -24,41 +24,47 @@ function checkUnitsRequiredSatisfied(unitsRequired, total) {
 }
 
 export default class ProductConfigurationTile extends LightningElement {
+    
     @api conf;
-
-    warehouseCount = 0;
-
-    showEditAllocModal = false;
+    @api opptyId;
+    // = '0065g000008ykj0AAA';
 
     @track locationCounts = [];
-
+    
+    allocatedCount = 0;
+    showEditAllocModal = false;
     storesToUpdate = [];
-
     isSatisfied = true;
-
     requiredUnits;
+    showEdit = false;
+    stockCount = 0;
+
+    connectedCallback(){
+        if (this.conf.ProductItems__r && this.conf.ProductItems__r.length > 0) {
+            this.allocatedCount = this.conf.ProductItems__r.filter(item => {
+                return item.Opportunity__c && item.Opportunity__c === this.opptyId && item.Status__c === 'Reserved';
+            }).length;
+
+            this.stockCount = this.conf.ProductItems__r.filter(item => {
+                return item.Status__c === 'Available'
+            }).length;
+
+            this.showEdit = this.stockCount > 0;
+        }
+    }
 
     // eslint-disable-next-line no-unused-vars
     handleEditAlloc(event) {
         this.showEditAllocModal = true;
         getAllocations({confId: this.conf.Id})
             .then(result => {
-                let arr = Object.entries(result).map((item, idx) => {
+                this.locationCounts = Object.entries(result).map((item, idx) => {
                     const [location, count] = item;
                     return {
                         idx: idx,
                         location: location,
-                        count: count
-                    }
-                });
-                this.locationCounts = (arr.filter(item => {
-                    return item.location !== 'Warehouse'
-                })).map(item => {
-                    return {
-                        idx: item.idx,
-                        location: item.location,
-                        count: item.count,
-                        total: item.count + this.warehouseCount
+                        count: count,
+                        total: count + this.allocatedCount
                     }
                 });
             })
@@ -94,6 +100,7 @@ export default class ProductConfigurationTile extends LightningElement {
         let promises = this.storesToUpdate.map(eachLoc => {
             return updateLocations(
                 {
+                    opportunityId: this.opptyId,
                     confId: eachLoc.confId, 
                     location: eachLoc.location, 
                     numToUpdate: eachLoc.numToUpdate
@@ -108,37 +115,12 @@ export default class ProductConfigurationTile extends LightningElement {
         
         this.showEditAllocModal = false;
 
-        this.dispatchEvent(new CustomEvent('confupdate', {
-            detail: {}
-        }));
-
+        this.dispatchEvent(new CustomEvent('confupdate', {}));
     }
 
     handleRequiredUnitsChange(event) {
         this.requiredUnits = event.target.value;
         this.isSatisfied = checkUnitsRequiredSatisfied(this.requiredUnits, totalStoreCount(this));
-    }
-
-    get showEdit() {
-        if (this.conf.ProductItems__r && this.conf.ProductItems__r.length > 0) {
-            const arr = this.conf.ProductItems__r.filter(item => {
-                return item.Location__c !== 'Warehouse'
-            });
-
-            const warehouseOrReserve = this.conf.ProductItems__r.filter(item => {
-                return item.Location__c === 'Warehouse' || (item.Location__c !== 'Warehouse' && item.Status__c === 'Reserved')
-            });
-            this.warehouseCount = warehouseOrReserve.length;
-            if (arr.length > 0) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    get stockCount() {
-        return this.conf.ProductItems__r ? this.conf.ProductItems__r.length : 0;
     }
 
 }

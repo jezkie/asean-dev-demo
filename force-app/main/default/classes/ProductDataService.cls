@@ -38,8 +38,8 @@ public class ProductDataService {
 
     @AuraEnabled(cacheable=true)
     public static List<LaptopConfiguration__c> getConfigurations(String productId) {
-        return [SELECT Id, Name, Processor__c, Memory__c, StorageType__c, Price__c, StockCount__c,
-                    (SELECT Id, Location__c, Status__c FROM ProductItems__r WHERE Status__c = 'Available' OR Status__c = 'Reserved')  
+        return [SELECT Id, Name, Processor__c, Memory__c, StorageType__c, Price__c, 
+                    (SELECT Id, Location__c, Status__c, Opportunity__c FROM ProductItems__r WHERE Status__c = 'Available' OR (Status__c = 'Reserved' AND Opportunity__c != null))  
                 FROM LaptopConfiguration__c 
                 WHERE ConfigurableProduct__c = :productId];
     }
@@ -68,15 +68,16 @@ public class ProductDataService {
     }
 
     @AuraEnabled(cacheable=false)
-    public static Boolean updateLocations(String confId, String location, Integer numToUpdate) {
+    public static Boolean updateLocations(String opportunityId, String confId, String location, Integer numToUpdate) {
         List<ProductItem__c> itemsToUpdate = new List<ProductItem__c>();
 
         try {
-            List<LaptopConfiguration__c> confgs = [SELECT Id, (SELECT Id, SerialNo__c FROM ProductItems__r WHERE Location__c = :location AND Status__c = 'Available' LIMIT :numToUpdate) FROM LaptopConfiguration__c WHERE Id = :confId];
+            List<LaptopConfiguration__c> confgs = [SELECT Id, (SELECT Id, SerialNo__c, Opportunity__c FROM ProductItems__r WHERE Location__c = :location AND Status__c = 'Available' LIMIT :numToUpdate) FROM LaptopConfiguration__c WHERE Id = :confId];
             for (LaptopConfiguration__c conf : confgs) {
                 for (ProductItem__c p : conf.ProductItems__r) {
                     System.debug(p.SerialNo__c);
                     p.Status__c = 'Reserved'; 
+                    p.Opportunity__c = opportunityId;
                     itemsToUpdate.add(p);
                 }
             }
@@ -84,6 +85,7 @@ public class ProductDataService {
             update itemsToUpdate;
             System.debug(confgs);
         } catch (Exception e) {
+            System.debug(e);
             return false;
         } 
 
