@@ -108,16 +108,13 @@ export default class ProductConfigurationTile extends LightningElement {
             );
         });
 
-        this.dispatchEvent(new CustomEvent('loading', {detail: true}));
         Promise.all(promises)
             .then(res => {
-                this.dispatchEvent(new CustomEvent('loading', {detail: false}));
                 console.log('Update location results', res);
+                this.dispatchEvent(new CustomEvent('confupdate', {}));
             });
         
         this.showEditAllocModal = false;
-
-        this.dispatchEvent(new CustomEvent('confupdate', {}));
     }
 
     handleRequiredUnitsChange(event) {
