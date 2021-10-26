@@ -5,14 +5,16 @@
         <p><span style="font-weight: bold;">RAM: </span> {conf.Memory__c}</p>
         <p><span style="font-weight: bold;">Storage: </span> {conf.StorageType__c}</p>
         <p><span style="font-weight: bold;">Price: </span><lightning-formatted-number format-style="currency" currency-code="USD" value={conf.Price__c}></lightning-formatted-number></p>
-        <p><span style="font-weight: bold;">Available: </span> {stockCount}</p>
-
-        <p><span style="font-weight: bold;">{allocatedCount}</span> are reserved for this opportunity. &nbsp;
-        
-            <template if:true={showEdit}>
-                <lightning-button variant="base" label="Click to reserve" onclick={handleEditAlloc}></lightning-button>
-            </template>
-        </p>
+        <template if:true={opptyId}>
+            <p><span style="font-weight: bold;">Available: </span> {stockCount}</p>
+    
+            <p><span style="font-weight: bold;">{allocatedCount}</span> are reserved for this opportunity. &nbsp;
+            
+                <template if:true={showEdit}>
+                    <lightning-button variant="base" label="Click to reserve" onclick={handleEditAlloc}></lightning-button>
+                </template>
+            </p>
+        </template>
     </div>
 
     <template if:true={showEditAllocModal}>

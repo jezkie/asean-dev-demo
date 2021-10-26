@@ -1,7 +1,9 @@
 import { LightningElement, api, wire } from 'lwc';
+import {NavigationMixin} from 'lightning/navigation';
+
 import getProductSpecification from '@salesforce/apex/ProductDataService.getProductSpecification';
 
-export default class ProductFullSpec extends LightningElement {
+export default class ProductFullSpec extends NavigationMixin(LightningElement) {
 
     productSpec;
     @api productId;
@@ -13,6 +15,7 @@ export default class ProductFullSpec extends LightningElement {
                 const spec = data[0];
 
                 this.productSpec = {
+                    id: spec.Id,
                     processor: spec.Processor__c,
                     operatingSystem: spec.Operating_System__c,
                     display: spec.Display__c,
@@ -36,6 +39,29 @@ export default class ProductFullSpec extends LightningElement {
     @api
     reset() {
         this.productSpec = null;
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    handleUpdate(event) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.productSpec.id,
+                objectApiName: 'ProductSpecification__c',
+                actionName: 'view'
+            },
+        });
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    handleCreate(event) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',
+            attributes: {
+                objectApiName: 'ProductSpecification__c',
+                actionName: 'new'
+            },
+        });
     }
     
 }

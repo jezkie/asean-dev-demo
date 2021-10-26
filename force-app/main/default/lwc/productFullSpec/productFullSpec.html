@@ -1,5 +1,15 @@
 <template>
     <lightning-card>
+        <p slot="actions">
+            <template if:true={productId}>
+                <template if:true={productSpec} >
+                    <lightning-button label="Update Specification" onclick={handleUpdate}></lightning-button>
+                </template>
+                <template if:false={productSpec} >
+                    <lightning-button label="Update Specification" onclick={handleCreate}></lightning-button>
+                </template>
+            </template>
+        </p>
         <template if:true={productSpec} >
             <lightning-layout multiple-rows="true" horizontal-align="center">
                 <lightning-layout-item padding="around-medium" size="4" class="label">

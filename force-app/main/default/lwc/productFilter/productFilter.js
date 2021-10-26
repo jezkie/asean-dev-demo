@@ -40,10 +40,6 @@ export default class ProductFilter extends LightningElement {
 
     handleChange(event) {
         this[event.target.name] = event.detail.value;
-    }
-
-    // eslint-disable-next-line no-unused-vars
-    handleSearch(event) {
         this.dispatchEvent(new CustomEvent('search', {
             detail: {
                 brand: this.brand || '',
