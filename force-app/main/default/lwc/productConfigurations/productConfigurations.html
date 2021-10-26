@@ -3,7 +3,7 @@
         <lightning-layout multiple-rows="true">
             <template for:each={configs} for:item="conf">
                 <lightning-layout-item key={conf.Id} size="6" class="slds-p-top_none slds-p-bottom_small slds-p-right_small slds-p-left_small">
-                    <c-product-configuration-tile oppty-id={opptyId} conf={conf} onconfupdate={handleConfUpdate}></c-product-configuration-tile>
+                    <c-product-configuration-tile onloading={handleLoading} oppty-id={opptyId} conf={conf} onconfupdate={handleConfUpdate}></c-product-configuration-tile>
                 </lightning-layout-item>
             </template>
         </lightning-layout>

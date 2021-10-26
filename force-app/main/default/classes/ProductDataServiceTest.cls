@@ -3,6 +3,7 @@ public class ProductDataServiceTest {
 
     @TestSetup
     static void makeData(){
+        
         Product2 laptop = new Product2(
             Brand__c='Lenovo',
             Name='Lenovo Legion 5',
@@ -37,52 +38,17 @@ public class ProductDataServiceTest {
 
         insert productItems;
 
+
+        insert new Opportunity(Name='Test', CloseDate=Date.today().addDays(1), StageName='Negotiation/Review');
+
     }
 
     @IsTest
     static void testGetProducts() {
         List<Product2> products = ProductDataService.getProducts('Lenovo', Null, Null, Null);
-        System.debug(products.size());
+        System.assert(products.size() > 0);
     }
     
-    @IsTest
-    static void testBuildQueryBrand() {
-        String query = ProductDataService.buildQuery('Lenovo', Null, Null, Null);
-        System.debug(query);
-    }
-
-    @IsTest
-    static void testBuildQueryNullParams() {
-        String query = ProductDataService.buildQuery(Null, Null, Null, Null);
-        System.debug(query);
-    }
-
-
-    @IsTest
-    static void testBuildQueryFullParams() {
-        String query = ProductDataService.buildQuery(Null, 'i5', '8', 'SSD');
-        System.debug(query);
-    }
-
-
-    @IsTest
-    static void testBuildQueryProcessor() {
-        String query = ProductDataService.buildQuery(Null, 'i5', Null, Null);
-        System.debug(query);
-    }
-
-    @IsTest
-    static void testBuildQueryMemory() {
-        String query = ProductDataService.buildQuery(Null, Null, '8' , Null);
-        System.debug(query);
-    }
-
-    @IsTest
-    static void testBuildQueryStorage() {
-        String query = ProductDataService.buildQuery(Null, Null, Null , 'HDD');
-        System.debug(query);
-    }
-
     @IsTest
     static void testUpdateLocation() {
         Product2 laptop = [SELECT Id FROM Product2 LIMIT 1];
@@ -97,7 +63,9 @@ public class ProductDataServiceTest {
 
         insert productItems;
 
-        ProductDataService.updateLocations(entry.Id, 'Store One', 2);
+        Opportunity oppty = [SELECT Id FROM Opportunity LIMIT 1];
+
+        ProductDataService.updateLocations(oppty.Id, entry.Id, 'Store One', 2);
 
         List<ProductItem__c> result = [SELECT Id FROM ProductItem__c WHERE Status__c = 'Reserved'];
         System.assertEquals(2, result.size());

@@ -29,6 +29,8 @@ export default class ProductList extends LightningElement {
                 }
             });
         }
+
+        this.dispatchEvent(new CustomEvent('loading', {detail: false}));
     }
 
     @api
@@ -38,6 +40,7 @@ export default class ProductList extends LightningElement {
         this.ram = ram;
         this.storage = storage;
         this.selectedProduct = '';
+        this.dispatchEvent(new CustomEvent('loading', {detail: true}));
     }
 
     handleProductSelect(event) {
@@ -48,6 +51,6 @@ export default class ProductList extends LightningElement {
     }
 
     get showList() {
-        return this.products && this.products !== undefined && this.products.length > 0 ? true : false;
+        return this.products && this.products !== undefined && this.products.length > 0;
     }
 }

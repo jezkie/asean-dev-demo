@@ -5,13 +5,19 @@
         </lightning-layout-item>
 
         <lightning-layout-item size="5" padding="horizontal-small">
-            <c-product-list onproductselect={handleProductSelect}></c-product-list>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+            </template>
+            <c-product-list onloading={handleLoading} onproductselect={handleProductSelect}></c-product-list>
         </lightning-layout-item>
 
         <lightning-layout-item size="7">
             <lightning-tabset variant="scoped">
                 <lightning-tab label="Configurations" value="configuration" onactive={handleActiveTab}>
-                    <c-product-configurations oppty-id={opptyId} product-id={selectedId}></c-product-configurations>
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+                    </template>
+                    <c-product-configurations onloading={handleLoading} oppty-id={opptyId} product-id={selectedId}></c-product-configurations>
                 </lightning-tab>
                 <lightning-tab label="Full Specs" value="fullspec" onactive={handleActiveTab}>
                     <c-product-full-spec product-id={selectedId}></c-product-full-spec>

@@ -28,6 +28,10 @@ export default class ProductConfigurations extends LightningElement {
         return refreshApex(this.wiredConfs);
     }
 
+    handleLoading(event) {
+        this.dispatchEvent(new CustomEvent('loading', {detail: event.detail}));
+    }
+
     get showConfigs() {
         return this.configs && this.configs !== undefined && this.configs.length > 0;
     }

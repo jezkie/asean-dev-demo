@@ -8,6 +8,7 @@ export default class ProductCatalog extends LightningElement {
 
     @api opptyId;
     selectedId = '';
+    isLoading = false;
 
     handleProductSelect(event) {
         this.selectedId = event.detail;
@@ -28,5 +29,10 @@ export default class ProductCatalog extends LightningElement {
                 comp.reset();
             }
         }
+    }
+
+    handleLoading(event) {
+        this.isLoading = event.detail;
+        console.log('loading', this.isLoading);
     }
 }
