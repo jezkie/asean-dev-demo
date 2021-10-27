@@ -27,7 +27,7 @@ export default class ProductFullSpec extends NavigationMixin(LightningElement) {
                     audio: spec.Audio__c,
                     dimension: spec.Dimension__c,
                     weight: spec.Weight__c,
-                    connectivity: spec.Connectivity,
+                    connectivity: spec.Connectivity__c,
                     ports: spec.Ports__c,
                     others: spec.Others__c
                 };
