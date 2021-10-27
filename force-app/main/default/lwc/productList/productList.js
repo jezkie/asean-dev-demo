@@ -24,7 +24,7 @@ export default class ProductList extends LightningElement {
                     Name: item.Name,
                     MinUnitPrice__c: item.MinUnitPrice__c,
                     MaxUnitPrice__c: item.MaxUnitPrice__c,
-                    available: (item.ProductItems__r) ? item.ProductItems__r.length : 0,
+                    available: item.Items_in_stock__c,
                     availableCfg: (item.LaptopConfigurations__r) ? item.LaptopConfigurations__r.length : 0
                 }
             });

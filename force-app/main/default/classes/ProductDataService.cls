@@ -27,7 +27,7 @@ public class ProductDataService {
         }
 
 
-        String query = 'SELECT Id, Name, Description, MaxUnitPrice__c, MinUnitPrice__c, DisplayUrl, (' 
+        String query = 'SELECT Id, Name, Description, Items_in_stock__c, MaxUnitPrice__c, MinUnitPrice__c, DisplayUrl, (' 
             + productItemsQuery + '), '
             + '(SELECT Id FROM LaptopConfigurations__r) ' 
             + 'FROM Product2 WHERE Family = \'Laptop\''

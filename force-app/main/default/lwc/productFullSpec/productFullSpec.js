@@ -6,6 +6,7 @@ import getProductSpecification from '@salesforce/apex/ProductDataService.getProd
 export default class ProductFullSpec extends NavigationMixin(LightningElement) {
 
     productSpec;
+    
     @api productId;
 
     @wire(getProductSpecification, { productId: '$productId' })
@@ -62,6 +63,10 @@ export default class ProductFullSpec extends NavigationMixin(LightningElement) {
                 actionName: 'new'
             },
         });
+    }
+
+    get message() {
+        return this.productId ? 'Specification not available for this product.' : 'Select a product to view specifications.'
     }
     
 }
