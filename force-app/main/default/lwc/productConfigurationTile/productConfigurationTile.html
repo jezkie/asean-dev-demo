@@ -40,7 +40,7 @@
                 </div>
                 <footer class="slds-modal__footer">
                     <lightning-button label="Cancel" onclick={handleCancelClick} style="margin-right: .75rem;"></lightning-button>
-                    <lightning-button variant="brand" onclick={handleSave} label="Save"></lightning-button>
+                    <lightning-button variant="brand" disabled={isSaveDisabled} onclick={handleSave} label="Save"></lightning-button>
                 </footer>
             </div>
         </div>

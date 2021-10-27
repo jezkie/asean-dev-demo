@@ -38,6 +38,7 @@ export default class ProductConfigurationTile extends LightningElement {
     requiredUnits;
     showEdit = false;
     stockCount = 0;
+    isSaveDisabled = true;
 
     connectedCallback(){
         if (this.conf.ProductItems__r && this.conf.ProductItems__r.length > 0) {
@@ -92,7 +93,9 @@ export default class ProductConfigurationTile extends LightningElement {
             this.storesToUpdate.push(storeToUpdate);
         }
 
-        this.isSatisfied = checkUnitsRequiredSatisfied(this.requiredUnits, totalStoreCount(this));
+        let total = totalStoreCount(this);
+        this.isSaveDisabled = total === 0;
+        this.isSatisfied = checkUnitsRequiredSatisfied(this.requiredUnits, total);
     }
 
     // eslint-disable-next-line no-unused-vars

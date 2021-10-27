@@ -10,7 +10,7 @@ trigger LaptopConfigurationTrigger on LaptopConfiguration__c (after insert, afte
         }
     }
 
-    List<Product2> products = [SELECT Id, MaxUnitPrice__c, MinUnitPrice__c, (SELECT Price__c FROM LaptopConfigurations__r WHERE Id IN :confs) FROM Product2 WHERE Id IN :productIds];
+    List<Product2> products = [SELECT Id, MaxUnitPrice__c, MinUnitPrice__c, (SELECT Price__c FROM LaptopConfigurations__r) FROM Product2 WHERE Id IN :productIds];
     Map<Id, Product2> productsToUpdate = new Map<Id, Product2>();
     for (Product2 eachProd : products) {
         Product2 currentProd = eachProd;
